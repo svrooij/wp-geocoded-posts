@@ -1,0 +1,32 @@
+{
+  "name": "wp-geocoded-posts",
+  "version": "0.0.1",
+  "description": "A build script for Wordpress Geocoded Posts plugin.",
+  "main": null,
+  "scripts": {
+    "build": "grunt build",
+    "deploy": "grunt deploy",
+    "test": "echo 'working'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svrooij/wp-geocoded-posts.git"
+  },
+  "author": {
+    "name": "Stephan van Rooij",
+    "email": "github@svrooij.nl",
+    "url": "https://svrooij.nl"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/svrooij/wp-geocoded-posts/issues"
+  },
+  "homepage": "https://github.com/svrooij/wp-geocoded-posts#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-wp-deploy": "^1.2.0",
+    "grunt-wp-readme-to-markdown": "^2.0.1"
+  }
+}
