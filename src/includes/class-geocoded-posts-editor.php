@@ -81,8 +81,8 @@ class Geocoded_Posts_Editor {
     }
 
     // Sanitize user input.
-    $latitude = sanitize_text_field( $_POST['geocoded_posts_lat'] );
-    $longitude = sanitize_text_field( $_POST['geocoded_posts_long'] );
+    $latitude = floatval( $_POST['geocoded_posts_lat'] );
+    $longitude = floatval( $_POST['geocoded_posts_long'] );
 
     $public = isset($_POST['geocoded_posts_public']) ? 1 : 0;
     // Update the meta field in the database.
