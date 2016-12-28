@@ -40,7 +40,7 @@
 	private function __construct() {
 
     // Load the correct text domain
-		add_action  ( 'plugins_loaded', array( $this, 'textdomain' ) );
+		add_action  ( 'plugins_loaded', array( $this, 'textdomain' ),10 );
 
     require_once('includes/class-geocoded-posts-widget.php');
     add_action('widgets_init', array( $this, 'register_widgets'));
@@ -50,6 +50,8 @@
       require_once('includes/class-geocoded-posts-editor.php');
     }
 
+    // Include REST Api extension if the api is loaded.
+    add_action ('plugins_loaded', array($this, 'rest_extension'), 11);
 	}
 
   /**
@@ -77,6 +79,11 @@
     register_widget( 'Geocoded_Posts_Widget' );
   }
 
+  public function rest_extension(){
+    if(class_exists( 'WP_REST_Controller' )){
+      require_once('includes/class-geocoded-posts-rest-api.php');
+    }
+  }
 
 
  }
