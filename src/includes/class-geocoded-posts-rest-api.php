@@ -32,7 +32,16 @@ class Geocoded_Posts_Rest_Api {
       $longitude = get_post_meta( $object['id'], 'geo_longitude', true);
 
       if(!empty($latitude) && !empty($longitude)){
-        return array('latitude' => floatval($latitude), 'longitude' => floatval($longitude));
+        $result = array(
+          'latitude' => floatval($latitude),
+          'longitude' => floatval($longitude)
+        );
+
+        $locality = get_post_meta($object['id'], 'geo_locality',true);
+        if(!empty($locality)){
+          $result['locality'] = $locality;
+        }
+        return $result;
       }
     }
     return;
