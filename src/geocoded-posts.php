@@ -48,6 +48,12 @@
 
 		if(is_admin()){
       require_once('includes/class-geocoded-posts-editor.php');
+      require_once('includes/class-geocoded-posts-settings.php');
+    }
+
+    // Can this be put in is_admin? OR should I just leave it here?
+    if(boolval(get_option('geocoded_posts_auto_geocode'))){
+      require_once('includes/class-geocoded-posts-geocoder.php');
     }
 
     // Include REST Api extension if the api is loaded.
