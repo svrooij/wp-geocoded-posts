@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     wp_readme_to_markdown: {
       your_target: {
         files: {
-          'README.md': 'src/readme.txt'
+          'README.md': 'geocoded-posts/readme.txt'
         }
       }
     },
@@ -13,28 +13,29 @@ module.exports = function (grunt) {
       main: {
         files: [
           {expand: true, nonull: true, src: ['LICENSE'], dest: 'build/'},
-          {expand: true, nonull: true, cwd: 'src/', src: ['readme.txt', '*.php', 'includes/*.php', 'languages/*.mo'], dest: 'build/'},
-          {expand: true, nonull: true, cwd: 'src/', src: ['js/*.js'], dest: 'build/'}
+          {expand: true, nonull: true, src: ['LICENSE'], dest: 'geocoded-posts/'},
+          {expand: true, nonull: true, cwd: 'geocoded-posts/', src: ['readme.txt', '*.php', 'includes/*.php', 'languages/*.mo'], dest: 'build/'},
+          {expand: true, nonull: true, cwd: 'geocoded-posts/', src: ['js/*.js'], dest: 'build/'}
         ]
       }
     },
     watch: {
       scripts: {
-        files: ['src/**/*.php', 'src/**/*.mo'],
+        files: ['geocoded-posts/**/*.php', 'geocoded-posts/**/*.mo'],
         tasks: ['copy'],
         options: {
           interrupt: true
         }
       },
       readme: {
-        files: 'src/readme.txt',
+        files: 'geocoded-posts/readme.txt',
         tasks: ['wp_readme_to_markdown', 'copy'],
         options: {
           interrupt: true
         }
       },
       js: {
-        files: 'src/js/*.js',
+        files: 'geocoded-posts/js/*.js',
         tasks: ['copy'], // Implement minify or at least standard.
         options: {
           interrupt: true

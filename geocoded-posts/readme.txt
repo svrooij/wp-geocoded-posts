@@ -7,8 +7,6 @@ Tested up to: 4.7
 Stable tag: 0.0.3
 License: MIT
 License URI: https://raw.githubusercontent.com/svrooij/wp-geocoded-posts/master/LICENSE
-Author: Stephan van Rooij
-Author URI: https://svrooij.nl
 
 Better location management with Location posts widget, location editor and location data in the REST api.
 
@@ -43,7 +41,7 @@ For development we use Github in combination with Grunt for easier deployment. I
 Installing this plugin is really easy.
 
 Just search in the Wordpress plugin directory for 'Geocoded posts'.
-Or download it right from [Github](https://github.com/svrooij/wp-geocoded-posts/) and copy the content of the `src` directory to `wp-content/plugins/geocoded-posts`.
+Or download it right from [Github](https://github.com/svrooij/wp-geocoded-posts/releases) and copy the `geocoded-posts` directory to `wp-content/plugins/`.
 
 == Changelog ==
 
