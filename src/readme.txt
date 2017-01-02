@@ -25,6 +25,7 @@ Current features:
 - Exposing a 'geo' object for each post in the REST api with 'latitude', 'longitude' and 'locality'
 
 Things that are on my wish list are:
+
 - Manually bulk geocoding old posts
 - Make the widget work with the api, so it will work with static html.
 - Displaying the geocoded posts on a map with a shortcode or something.
