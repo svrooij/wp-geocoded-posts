@@ -4,7 +4,7 @@ Donate link: https://svrooij.nl/buy-me-a-beer
 Tags: geocode, location, metadata
 Requires at least: 4.4
 Tested up to: 4.7
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 License: MIT
 License URI: https://raw.githubusercontent.com/svrooij/wp-geocoded-posts/master/LICENSE
 Author: Stephan van Rooij
@@ -45,6 +45,9 @@ Just search in the Wordpress plugin directory for 'Geocoded posts'.
 Or download it right from [Github](https://github.com/svrooij/wp-geocoded-posts/) and copy the content of the `src` directory to `wp-content/plugins/geocoded-posts`.
 
 == Changelog ==
+
+= 0.0.3 =
+Serious bug in the client-side geocoding javascript file fixed.
 
 = 0.0.2 =
 * Added server-side reverse geocoding (looking up the locality at a certain latitude longitude).
