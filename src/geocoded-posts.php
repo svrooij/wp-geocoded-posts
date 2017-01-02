@@ -10,7 +10,7 @@
  * Plugin Name:         Geocoded posts
  * Plugin URI:          https://github.com/svrooij/wp-geocoded-posts
  * Description:         Widget with geocoded posts and editing geo location on a post.
- * Version:             0.0.1
+ * Version:             0.0.2
  * Author:              Stephan van Rooij
  * Author URI:          https://svrooij.nl
  * License:             MIT
