@@ -4,9 +4,36 @@ class Geocoded_Posts_Geocoder {
 
   public function __construct(){
     // Handle new posts
+    add_action('added_post_meta',array($this,'backup_values'), 5, 4);
     add_action('added_post_meta',array($this,'handle_meta_update'), 10, 4);
     // Handle updates
+    add_action('updated_postmeta',array($this,'backup_values'), 5, 4);
     add_action('updated_postmeta',array($this,'handle_meta_update'), 10, 4);
+  }
+
+  // The inital location should always be kept.
+  // The mobile app sometimes overrides the location by accident.
+  public function backup_values($meta_id,$object_id,$meta_key,$meta_value) {
+    // Check $meta_key for 'geo_latitude' or 'geo_longitude'.
+    if('geo_latitude' != $meta_key && 'geo_longitude' != $meta_key){
+      return;
+    }
+
+    // If the value is 0 we might have to restore the backup.
+    // The mobile app sometimes overrides the location with lat:0 long:0.
+    if(0 == floatval($meta_value)){
+      // Get possible backup value.
+      $oldValue = floatval(get_post_meta( $object_id, 'gp_'.$meta_key, true));
+      if(0 != $oldValue){
+        // restore value
+        delete_post_meta($object_id,$meta_key);
+        add_post_meta($object_id, $meta_key, $oldValue);
+      }
+    } else { // Save the NOT 0 value as backup.
+      update_post_meta($object_id, 'gp_'.$meta_key, $meta_value);
+    }
+
+
   }
 
   public function handle_meta_update($meta_id,$object_id,$meta_key,$meta_value){
@@ -20,8 +47,8 @@ class Geocoded_Posts_Geocoder {
     if(0 == floatval($meta_value)) {
       return;
     }
-    $locality = get_post_meta( $object_id, 'geo_locality', true);
 
+    $locality = get_post_meta( $object_id, 'geo_locality', true);
     // If the locality is not empty just do nothing.
     if(!empty($locality)){
       return;
@@ -30,12 +57,15 @@ class Geocoded_Posts_Geocoder {
     $latitude = floatval(get_post_meta( $object_id, 'geo_latitude', true));
     $longitude = floatval(get_post_meta( $object_id, 'geo_longitude', true));
 
+    // Only do something when both values filled in.
     if(0 == $latitude || 0 == $longitude){
       return;
     }
 
-
-    self::fetch_locality_for_post($object_id,$latitude,$longitude);
+    // Check if we want auto geo encoding.
+    if(boolval(get_option('geocoded_posts_auto_geocode'))){
+      self::fetch_locality_for_post($object_id,$latitude,$longitude);
+    }
 
   }
 
@@ -49,7 +79,7 @@ class Geocoded_Posts_Geocoder {
       $longitude = floatval(get_post_meta( $post_id, 'geo_longitude', true));
     }
 
-    if(0 == $latitude && 0 == $longitude){
+    if(0 == $latitude || 0 == $longitude){
       return;
     }
 
@@ -58,7 +88,7 @@ class Geocoded_Posts_Geocoder {
     if(!empty($key)){
       $url.= "&key=$key";
     }
-    
+
     try {
       $json = file_get_contents($url);
       $data = json_decode($json);

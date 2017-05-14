@@ -16,6 +16,10 @@ jQuery(document).ready(function ($) {
   $('#geocoded_posts_locality').dblclick(function (event) {
     $(this).removeAttr('readonly')
     $('#btn-fetch-locality').show()
+  }).keydown(function(e) {
+    if (e.keyCode == 13) {
+        e.preventDefault()
+    }
   })
 
   // If you enter a location and the latitude and longitude are not know you can lookup the location.
@@ -28,9 +32,18 @@ jQuery(document).ready(function ($) {
           $('#geocoded_posts_locality').val(result.formatted_address)
           $('#geocoded_posts_lat').val(result.geometry.location.lat)
           $('#geocoded_posts_long').val(result.geometry.location.lng)
+          $('#geocoded_posts_public').attr('checked','checked')
         }
       })
     }
+  })
+
+  $('#btn-clear-geo').click(function(event){
+    event.preventDefault();
+    $('#geocoded_posts_locality').val('')
+    $('#geocoded_posts_lat').val('')
+    $('#geocoded_posts_long').val('')
+    $('#geocoded_posts_public').removeAttr('checked')
   })
 })
 

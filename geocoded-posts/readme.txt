@@ -3,8 +3,8 @@ Contributors: svrooij
 Donate link: https://svrooij.nl/buy-me-a-beer
 Tags: geocode, location, metadata
 Requires at least: 4.4
-Tested up to: 4.7
-Stable tag: 0.0.3
+Tested up to: 4.7.4
+Stable tag: 0.0.4
 License: MIT
 License URI: https://raw.githubusercontent.com/svrooij/wp-geocoded-posts/master/LICENSE
 
@@ -30,9 +30,8 @@ Things that are on my wish list are:
 
 = Notes =
 
-1. If you specify fields so it wouldn't return data the default response is send back to the client.
-2. If you like the plugin [buy me a beer](https://svrooij.nl/buy-me-a-beer/)
-3. Something wrong with this plugin? [Report issue on Github](https://github.com/svrooij/wp-geocoded-posts/issues)
+1. If you like the plugin [buy me a beer](https://svrooij.nl/buy-me-a-beer/)
+2. Something wrong with this plugin? [Report issue on Github](https://github.com/svrooij/wp-geocoded-posts/issues)
 
 For development we use Github in combination with Grunt for easier deployment. If you run `npm install` and `grunt build` in the cloned [repository](https://github.com/svrooij/wp-geocoded-posts/) it will produce a build folder. This folder contains all the files needed to run the plugin.
 
@@ -44,6 +43,11 @@ Just search in the Wordpress plugin directory for 'Geocoded posts'.
 Or download it right from [Github](https://github.com/svrooij/wp-geocoded-posts/releases) and copy the `geocoded-posts` directory to `wp-content/plugins/`.
 
 == Changelog ==
+
+= 0.0.4 =
+* Automatically create (and restore) backup location, in case the mobile app updates the location to 0,0.
+* Clear location button added.
+* Settings link right from the plugin menu.
 
 = 0.0.3 =
 Serious bug in the client-side geocoding javascript file fixed.

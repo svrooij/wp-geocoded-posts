@@ -63,6 +63,8 @@ class Geocoded_Posts_Editor {
     echo '<tr><th><label for="geocoded_posts_public">'.__('Visable','geocoded-posts').'</label></th>';
     echo '<td><input type="checkbox" id="geocoded_posts_public" name="geocoded_posts_public" value="1" '.$visable.'/></td></tr>';
 
+    echo '<tr><td></td><td><button id="btn-clear-geo">'.__('Clear location','geocoded-posts').'</button></td></tr>';
+
     echo '</tbody></table>';
   }
 
@@ -87,10 +89,10 @@ class Geocoded_Posts_Editor {
         return;
     }
 
-    // // Check if not a revision.
-    // if ( wp_is_post_revision( $post_id ) ) {
-    //     return;
-    // }
+    // Check if not a revision.
+    if ( wp_is_post_revision( $post_id ) ) {
+        return;
+    }
 
     // Check if user has permissions to save data.
     if ( ! current_user_can( 'edit_post', $post_id ) ) {
@@ -103,13 +105,17 @@ class Geocoded_Posts_Editor {
 
     $public = isset($_POST['geocoded_posts_public']) ? 1 : 0;
 
-    if($latitude == 0 && $longitude == 0) {
+    if($latitude == 0 && $longitude == 0 && !$public) {
       delete_post_meta( $post_id, 'geo_latitude');
       delete_post_meta( $post_id, 'geo_longitude');
       delete_post_meta( $post_id, 'geo_locality');
       delete_post_meta( $post_id, 'geo_public');
       return;
     }
+
+    // // Round the location fields (the app only supports 8 decimals, need quote?)
+    // $latitude = round($latitude,8);
+    // $longitude = round($longitude,8);
 
     // Update the meta field in the database.
     update_post_meta( $post_id, 'geo_locality', strip_tags($_POST['geocoded_posts_locality']));
