@@ -118,9 +118,16 @@ class Geocoded_Posts_Editor {
     // $longitude = round($longitude,8);
 
     // Update the meta field in the database.
-    update_post_meta( $post_id, 'geo_locality', strip_tags($_POST['geocoded_posts_locality']));
+    if(!empty($_POST['geocoded_posts_locality'])){
+      update_post_meta( $post_id, 'geo_locality', strip_tags($_POST['geocoded_posts_locality']));
+    }
     update_post_meta( $post_id, 'geo_latitude', $latitude );
     update_post_meta( $post_id, 'geo_longitude', $longitude );
+    
+    // Who would want to add a location and not set it to public...??
+    if(0==$public && !get_post_meta($post_id,'geo_public',true)){
+      $public = 1;
+    }
     update_post_meta( $post_id, 'geo_public', $public );
   }
 

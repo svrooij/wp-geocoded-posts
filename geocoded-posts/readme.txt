@@ -4,7 +4,7 @@ Donate link: https://svrooij.nl/buy-me-a-beer
 Tags: geocode, location, metadata
 Requires at least: 4.4
 Tested up to: 4.7.4
-Stable tag: 0.0.4
+Stable tag: 0.0.5
 License: MIT
 License URI: https://raw.githubusercontent.com/svrooij/wp-geocoded-posts/master/LICENSE
 
@@ -20,11 +20,12 @@ Current features:
 - Editing the location provided by the mobile app from the post edit screen.
 - Showing a widget with the latest x (configurable number) posts that have a geolocation.
 - Automatically looking up the locality of a new post.
-- Exposing a 'geo' object for each post in the REST api with 'latitude', 'longitude' and 'locality'
+- Exposing a 'geo' object for each post in the REST api with 'latitude', 'longitude' and 'locality'.
+- Posts from the mobile app connected through wordpress.com get the geo_public set automatically.
 
 Things that are on my wish list are:
 
-- Manually bulk geocoding old posts
+- Manually bulk geocoding old posts.
 - Make the widget work with the api, so it will work with static html.
 - Displaying the geocoded posts on a map with a shortcode or something.
 
@@ -43,6 +44,10 @@ Just search in the Wordpress plugin directory for 'Geocoded posts'.
 Or download it right from [Github](https://github.com/svrooij/wp-geocoded-posts/releases) and copy the `geocoded-posts` directory to `wp-content/plugins/`.
 
 == Changelog ==
+
+= 0.0.5 =
+* Setting 'geo_public' to 1 when a post comes in through wordpress.com
+* If you add a location it is set to public by default.
 
 = 0.0.4 =
 * Automatically create (and restore) backup location, in case the mobile app updates the location to 0,0.

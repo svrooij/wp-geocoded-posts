@@ -107,6 +107,10 @@ class Geocoded_Posts_Geocoder {
       $right_key = (array_keys($localityObjs))[0];
       $fetched_locality = $localityObjs[$right_key]->formatted_address;
       update_post_meta($post_id, 'geo_locality', $fetched_locality);
+
+      // Set the location to public, the Wordpress App doesn't do this when connected through wordpress.com
+      add_post_meta($post_id,'geo_public',1);
+
     } catch(Exception $e){
       if(WP_DEBUG){
         trigger_error($e->getMessage(),E_WARNING);
