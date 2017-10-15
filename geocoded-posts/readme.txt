@@ -3,7 +3,7 @@ Contributors: svrooij
 Donate link: https://svrooij.nl/buy-me-a-beer
 Tags: geocode, location, metadata
 Requires at least: 4.4
-Tested up to: 4.7.4
+Tested up to: 4.8.2
 Stable tag: 0.0.5
 License: MIT
 License URI: https://raw.githubusercontent.com/svrooij/wp-geocoded-posts/master/LICENSE
