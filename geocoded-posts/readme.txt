@@ -44,7 +44,7 @@ Or download it right from [Github](https://github.com/svrooij/wp-geocoded-posts/
 
 == Changelog ==
 
-= 0.0.6 =
+= 0.0.7 =
 * Remove numbers from formatted address.
 * Option to show author in widget.
 * Widget loads data from REST api
