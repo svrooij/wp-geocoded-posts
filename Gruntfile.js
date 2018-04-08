@@ -14,7 +14,7 @@ module.exports = function (grunt) {
         files: [
           {expand: true, nonull: true, src: ['LICENSE'], dest: 'build/'},
           {expand: true, nonull: true, src: ['LICENSE'], dest: 'geocoded-posts/'},
-          {expand: true, nonull: true, cwd: 'geocoded-posts/', src: ['readme.txt', '*.php', 'includes/*.php', 'languages/*.mo'], dest: 'build/'},
+          {expand: true, nonull: true, cwd: 'geocoded-posts/', src: ['readme.txt', '*.php', 'includes/*.php', 'languages/*.mo', 'languages/*.pot'], dest: 'build/'},
           {expand: true, nonull: true, cwd: 'geocoded-posts/', src: ['js/*.js'], dest: 'build/'}
         ]
       }
