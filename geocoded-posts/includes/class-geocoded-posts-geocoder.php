@@ -106,6 +106,8 @@ class Geocoded_Posts_Geocoder {
 
       $right_key = (array_keys($localityObjs))[0];
       $fetched_locality = $localityObjs[$right_key]->formatted_address;
+      // Remove numbers from string (like postal code) and trim (remove leading space).s
+      $fetched_locality = trim(preg_replace('/\d/', '', $fetched_locality));
       update_post_meta($post_id, 'geo_locality', $fetched_locality);
 
       // Set the location to public, the Wordpress App doesn't do this when connected through wordpress.com

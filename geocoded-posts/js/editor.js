@@ -7,7 +7,7 @@ jQuery(document).ready(function ($) {
     var latlng = $('#geocoded_posts_lat').val() + ',' + $('#geocoded_posts_long').val()
     queryGoogleMaps({latlng: latlng, sensor: true}, function (result) {
       if (result) {
-        $('#geocoded_posts_locality').val(result.formatted_address)
+        $('#geocoded_posts_locality').val(geocodeCleanAddress(result.formatted_address))
       }
     })
   })
@@ -29,7 +29,7 @@ jQuery(document).ready(function ($) {
     if (query !== '') {
       queryGoogleMaps({address: query, sensor: false}, function (result) {
         if (result) {
-          $('#geocoded_posts_locality').val(result.formatted_address)
+          $('#geocoded_posts_locality').val(geocodeCleanAddress(result.formatted_address))
           $('#geocoded_posts_lat').val(result.geometry.location.lat)
           $('#geocoded_posts_long').val(result.geometry.location.lng)
           $('#geocoded_posts_public').attr('checked', 'checked')
@@ -80,4 +80,8 @@ function queryGoogleMaps (queryArray, callback) {
       callback(result[0])
     }
   })
+}
+
+function geocodeCleanAddress (address) {
+  return address.replace(/[0-9]/g, '').trim()
 }
