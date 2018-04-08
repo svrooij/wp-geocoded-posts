@@ -17,6 +17,8 @@ class Geocoded_Posts_Widget extends WP_Widget {
 		$count = isset($instance['count'])? $instance['count'] : 5;
 		$cat = isset($instance['cat'])? $instance['cat'] : '';
 
+		$showAuthor = isset($instance['showAuthor']) ? boolval($instance['showAuthor']) : true;
+
 		/* Posts ophalen */
 		$q = array(
 			'posts_per_page' => $count,
@@ -41,32 +43,54 @@ class Geocoded_Posts_Widget extends WP_Widget {
 			)
 		);
 
-		$posts_array = get_posts($q);
-		if(count($posts_array) > 0){
+		$widget_query = new WP_Query($q);
+		if($widget_query->have_posts()){
 			echo $args['before_widget'];
 
-			if ( ! empty( $title ) )
-				echo $args['before_title'] . $title . $args['after_title'];
-
+			if ( ! empty( $title ) ){ echo $args['before_title'] . $title . $args['after_title']; }
+			
 			echo '<ul>';
 
-			foreach($posts_array as $geo_post) {
-				//print_r($geo_post);
-				$link = get_permalink($geo_post);
-				$title = get_the_title($geo_post);
-				echo '<li><a href="'.$link.'" >'.$title.'</a></li>';
-
+			while($widget_query->have_posts()) {
+				$widget_query->the_post();
+				if($showAuthor) {
+					printf('<li><a href="%s">%s</a></li>', get_permalink(), sprintf(__('%s by %s'), get_the_title(), get_the_author()));
+				} else {
+					printf('<li><a href="%s">%s</a></li>', get_permalink(), get_the_title());
+				}
 			}
 
 			echo '</ul>';
-
 			echo $args['after_widget'];
 
 		}
+		wp_reset_query();
+		wp_reset_postdata();
 
+		// $posts_array = get_posts($q);
+		// if(count($posts_array) > 0){
+		// 	echo $args['before_widget'];
 
+		// 	if ( ! empty( $title ) )
+		// 		echo $args['before_title'] . $title . $args['after_title'];
 
+		// 	echo '<ul>';
 
+		// 	foreach($posts_array as $geo_post) {
+		// 		//print_r($geo_post);
+		// 		$link = get_permalink($geo_post);
+		// 		$title = get_the_title($geo_post);
+		// 		if($showAuthor) {
+		// 			$author = get_the_author($geo_post->ID);
+		// 			echo '<li><a href="'.$link.'" >'.sprintf(__('%s by %s'), $title, $author).'</a></li>';
+		// 		} else {
+		// 			echo '<li><a href="'.$link.'" >'.$title.'</a></li>';
+		// 		}
+		// 	}
+
+		// 	echo '</ul>';
+		// 	echo $args['after_widget'];
+		// }
 	}
 
  	public function form( $instance ) {
@@ -82,6 +106,8 @@ class Geocoded_Posts_Widget extends WP_Widget {
 
 		if(isset($instance['count'])){ $count = $instance['count'];}
 		else { $count = '10'; }
+
+		$showAuthor = isset($instance['showAuthor']) ? boolval($instance['showAuthor']) : false;
 		?>
 		<p>
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title','geocoded-posts'); ?></label>
@@ -93,7 +119,11 @@ class Geocoded_Posts_Widget extends WP_Widget {
 		</p>
 		<p>
 		<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e('Number of posts','geocoded-posts'); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="text" value="<?php echo esc_attr( $count ); ?>" />
+		<input class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>" type="number" value="<?php echo esc_attr( $count ); ?>" />
+		</p>
+		<p>
+		<input class="checkbox" type="checkbox" <?php if($showAuthor) { echo 'checked="checked"'; } ?> id="<?php echo $this->get_field_id( 'showAuthor' ); ?>" name="<?php echo $this->get_field_name( 'showAuthor' ); ?>" />
+		<label for="<?php echo $this->get_field_id( 'showAuthor' ); ?>"><?php _e('Show Author','geocoded-posts'); ?></label>
 		</p>
 		<?php
 	}
@@ -103,6 +133,7 @@ class Geocoded_Posts_Widget extends WP_Widget {
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 		$instance['cat'] = ( ! empty( $new_instance['cat'] ) ) ? strip_tags( $new_instance['cat'] ) : '';
 		$instance['count'] = ( ! empty( $new_instance['count'] ) ) ? strip_tags( $new_instance['count'] ) : '';
+		$instance['showAuthor'] = (!empty($new_instance['showAuthor'])) ? boolval($new_instance['showAuthor']) : true;
 
 		return $instance;
 	}

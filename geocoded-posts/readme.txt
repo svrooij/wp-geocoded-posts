@@ -3,8 +3,8 @@ Contributors: svrooij
 Donate link: https://svrooij.nl/buy-me-a-beer
 Tags: geocode, location, metadata
 Requires at least: 4.4
-Tested up to: 4.8.2
-Stable tag: 0.0.5
+Tested up to: 4.9.5
+Stable tag: 0.0.6
 License: MIT
 License URI: https://raw.githubusercontent.com/svrooij/wp-geocoded-posts/master/LICENSE
 
@@ -44,6 +44,10 @@ Just search in the Wordpress plugin directory for 'Geocoded posts'.
 Or download it right from [Github](https://github.com/svrooij/wp-geocoded-posts/releases) and copy the `geocoded-posts` directory to `wp-content/plugins/`.
 
 == Changelog ==
+
+= 0.0.6 =
+* Remove numbers from formatted address.
+* Option to show author in widget.
 
 = 0.0.5 =
 * Setting 'geo_public' to 1 when a post comes in through wordpress.com

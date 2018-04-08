@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Wordpress Geocoded posts\n"
-"POT-Creation-Date: 2017-05-14 13:22+0200\n"
+"POT-Creation-Date: 2018-04-08 15:46+0200\n"
 "PO-Revision-Date: 2016-12-27 22:34+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.1\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -80,7 +80,7 @@ msgid "This key should be provided to keep your server from being blocked. <a hr
 msgstr ""
 
 #: includes/class-geocoded-posts-widget.php:8
-#: includes/class-geocoded-posts-widget.php:77
+#: includes/class-geocoded-posts-widget.php:85
 msgid "Posts with location"
 msgstr ""
 
@@ -88,14 +88,23 @@ msgstr ""
 msgid "Recent posts with location"
 msgstr ""
 
-#: includes/class-geocoded-posts-widget.php:87
+#: includes/class-geocoded-posts-widget.php:61
+#, php-format
+msgid "%s by %s"
+msgstr ""
+
+#: includes/class-geocoded-posts-widget.php:97
 msgid "Title"
 msgstr ""
 
-#: includes/class-geocoded-posts-widget.php:91
+#: includes/class-geocoded-posts-widget.php:101
 msgid "Category"
 msgstr ""
 
-#: includes/class-geocoded-posts-widget.php:95
+#: includes/class-geocoded-posts-widget.php:105
 msgid "Number of posts"
+msgstr ""
+
+#: includes/class-geocoded-posts-widget.php:110
+msgid "Show Author"
 msgstr ""

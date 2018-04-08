@@ -10,11 +10,11 @@
  * Plugin Name:         Geocoded posts
  * Plugin URI:          https://github.com/svrooij/wp-geocoded-posts
  * Description:         Widget with geocoded posts and editing geo location on a post.
- * Version:             0.0.5
+ * Version:             0.0.6
  * Author:              Stephan van Rooij
  * Author URI:          https://svrooij.nl
  * License:             MIT
- * License URI:         https://raw.githubusercontent.com/svrooij/rest-api-filter-fields/master/LICENSE
+ * License URI:         https://raw.githubusercontent.com/svrooij/wp-geocoded-posts/master/LICENSE
  * Text Domain:         geocoded-posts
  * Domain Path:         /languages/
  */
@@ -25,7 +25,7 @@
     * Constant with the version number.
     *
     */
-  const VERSION = '0.0.4';
+  const VERSION = '0.0.6';
 
    /**
 	 * Static property to hold our singleton instance
