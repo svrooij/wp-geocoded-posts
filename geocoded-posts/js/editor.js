@@ -16,9 +16,9 @@ jQuery(document).ready(function ($) {
   $('#geocoded_posts_locality').dblclick(function (event) {
     $(this).removeAttr('readonly')
     $('#btn-fetch-locality').show()
-  }).keydown(function(e) {
-    if (e.keyCode == 13) {
-        e.preventDefault()
+  }).keydown(function (e) {
+    if (e.keyCode === 13) {
+      e.preventDefault()
     }
   })
 
@@ -32,14 +32,14 @@ jQuery(document).ready(function ($) {
           $('#geocoded_posts_locality').val(result.formatted_address)
           $('#geocoded_posts_lat').val(result.geometry.location.lat)
           $('#geocoded_posts_long').val(result.geometry.location.lng)
-          $('#geocoded_posts_public').attr('checked','checked')
+          $('#geocoded_posts_public').attr('checked', 'checked')
         }
       })
     }
   })
 
-  $('#btn-clear-geo').click(function(event){
-    event.preventDefault();
+  $('#btn-clear-geo').click(function (event) {
+    event.preventDefault()
     $('#geocoded_posts_locality').val('')
     $('#geocoded_posts_lat').val('')
     $('#geocoded_posts_long').val('')
