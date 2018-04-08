@@ -10,6 +10,8 @@ class Geocoded_Posts_Widget extends WP_Widget {
 				'description' => __('Recent posts with location','geocoded-posts'),
 			) // Args
 		);
+
+		add_action('wp_enqueue_scripts', array($this, 'register_script'));
 	}
 
 	public function widget( $args, $instance ) {
@@ -18,79 +20,14 @@ class Geocoded_Posts_Widget extends WP_Widget {
 		$cat = isset($instance['cat'])? $instance['cat'] : '';
 
 		$showAuthor = isset($instance['showAuthor']) ? boolval($instance['showAuthor']) : true;
+		echo $args['before_widget'];
 
-		/* Posts ophalen */
-		$q = array(
-			'posts_per_page' => $count,
-			'category' => $cat,
-			'post_type' => 'post',
-			'post_status' => 'publish',
-			'suppress_filters' => true,
-			'meta_query' => array(
-				'relation' => 'AND',
-				array(
-					'key' => 'geo_latitude',
-					'compare' => 'EXISTS'
-				),
-				array(
-					'key' => 'geo_longitude',
-					'compare' => 'EXISTS'
-				),
-				array(
-					'key' => 'geo_public',
-					'value' => '1'
-				),
-			)
-		);
+		if ( ! empty( $title ) ){ echo $args['before_title'] . $title . $args['after_title']; }
 
-		$widget_query = new WP_Query($q);
-		if($widget_query->have_posts()){
-			echo $args['before_widget'];
-
-			if ( ! empty( $title ) ){ echo $args['before_title'] . $title . $args['after_title']; }
-			
-			echo '<ul>';
-
-			while($widget_query->have_posts()) {
-				$widget_query->the_post();
-				if($showAuthor) {
-					printf('<li><a href="%s">%s</a></li>', get_permalink(), sprintf(__('%s by %s'), get_the_title(), get_the_author()));
-				} else {
-					printf('<li><a href="%s">%s</a></li>', get_permalink(), get_the_title());
-				}
-			}
-
-			echo '</ul>';
-			echo $args['after_widget'];
-
-		}
-		wp_reset_query();
-		wp_reset_postdata();
-
-		// $posts_array = get_posts($q);
-		// if(count($posts_array) > 0){
-		// 	echo $args['before_widget'];
-
-		// 	if ( ! empty( $title ) )
-		// 		echo $args['before_title'] . $title . $args['after_title'];
-
-		// 	echo '<ul>';
-
-		// 	foreach($posts_array as $geo_post) {
-		// 		//print_r($geo_post);
-		// 		$link = get_permalink($geo_post);
-		// 		$title = get_the_title($geo_post);
-		// 		if($showAuthor) {
-		// 			$author = get_the_author($geo_post->ID);
-		// 			echo '<li><a href="'.$link.'" >'.sprintf(__('%s by %s'), $title, $author).'</a></li>';
-		// 		} else {
-		// 			echo '<li><a href="'.$link.'" >'.$title.'</a></li>';
-		// 		}
-		// 	}
-
-		// 	echo '</ul>';
-		// 	echo $args['after_widget'];
-		// }
+		echo "<ul data-count='$count' data-author='$showAuthor'></ul>";
+		
+		echo $args['after_widget'];
+		
 	}
 
  	public function form( $instance ) {
@@ -136,5 +73,16 @@ class Geocoded_Posts_Widget extends WP_Widget {
 		$instance['showAuthor'] = (!empty($new_instance['showAuthor'])) ? boolval($new_instance['showAuthor']) : true;
 
 		return $instance;
+	}
+
+	function register_script() {
+		wp_register_script('geocoded-widget',
+			plugins_url( '../js/widget.js', __FILE__ ), 
+            array ('jquery'),
+			false, true
+		);
+		if ( is_active_widget(false, false, $this->id_base, true) ) {
+			wp_enqueue_script('geocoded-widget');
+		}
 	}
 }

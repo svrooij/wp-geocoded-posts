@@ -18,7 +18,7 @@ This works great but doesn't really allow for easy editing or show this informat
 Current features:
 
 - Editing the location provided by the mobile app from the post edit screen.
-- Showing a widget with the latest x (configurable number) posts that have a geolocation.
+- Showing a widget with the latest x (configurable number) posts that have a geolocation (loads async).
 - Automatically looking up the locality of a new post.
 - Exposing a 'geo' object for each post in the REST api with 'latitude', 'longitude' and 'locality'.
 - Posts from the mobile app connected through wordpress.com get the geo_public set automatically.
@@ -26,7 +26,6 @@ Current features:
 Things that are on my wish list are:
 
 - Manually bulk geocoding old posts.
-- Make the widget work with the api, so it will work with static html.
 - Displaying the geocoded posts on a map with a shortcode or something.
 
 ### Notes ###
@@ -48,6 +47,7 @@ Or download it right from [Github](https://github.com/svrooij/wp-geocoded-posts/
 ### 0.0.6 ###
 * Remove numbers from formatted address.
 * Option to show author in widget.
+* Widget loads data from REST api
 
 ### 0.0.5 ###
 * Setting 'geo_public' to 1 when a post comes in through wordpress.com
