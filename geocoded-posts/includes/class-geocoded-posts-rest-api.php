@@ -77,8 +77,13 @@ class Geocoded_Posts_Rest_Api {
   }
 
   public function get_items($request, $showGeo = false, $full = false) {
+    $paged = isset($request['paged']) ? intval($request['paged']) : 1;
+    if($paged < 1 || $paged > 20) {
+      $paged = 1;
+    }
     $q = array(
             'posts_per_page' => 10,
+            'paged' => $paged,
             //'category' => $cat,
             'post_type' => 'post',
             'post_status' => 'publish',

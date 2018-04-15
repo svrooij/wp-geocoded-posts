@@ -4,7 +4,7 @@
 **Tags:** geocode, location, metadata  
 **Requires at least:** 4.4  
 **Tested up to:** 4.9.5  
-**Stable tag:** 0.0.6  
+**Stable tag:** 0.0.8  
 **License:** MIT  
 **License URI:** https://raw.githubusercontent.com/svrooij/wp-geocoded-posts/master/LICENSE  
 
